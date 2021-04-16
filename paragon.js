@@ -66,12 +66,14 @@ const addBill = (id,val) =>{
   let ilosc = row.insertCell(2);
   let cena = row.insertCell(3);
   let suma = row.insertCell(4);
+  let usun = row.insertCell(5);
   lp.id="id";
   lp.innerHTML = id+1;
   nazwa.innerHTML =val.name;
   ilosc.innerHTML =val.quantity;
   cena.innerHTML =val.price;
   suma.innerHTML = val.quantity * val.price;
+  usun.innerHTML = "<button onclick='deleteProduct(this)'>Usun</button>";
 }
 
 
@@ -90,6 +92,19 @@ addForm.onsubmit = (event) =>
   testBill.productList.push(prod);
   addBill(testBill.productList.length-1,prod);
   event.preventDefault();
+}
+
+function deleteProduct(x){
+  var i = x.parentNode.parentNode.rowIndex;
+  console.log(i);
+  testBill.productList.splice(i - 1,1);
+  var tableLength = testBill.productList.length;
+  document.getElementById("billTable").deleteRow(i);
+  var table = document.getElementById("billTable");
+
+  table.setAttribute("id",2);
+  console.log(testBill.productList);
+  
 }
 
 // let produkty = [];
