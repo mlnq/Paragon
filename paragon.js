@@ -104,10 +104,7 @@ function deleteProduct(x){
   testBill.productList.splice(i - 1,1);
   var tableLength = testBill.productList.length;
   var table = document.getElementById("billTable");
-  
-  
   document.getElementById("billTable").deleteRow(i);
-  //var table = document.getElementById("billTable");
   for(let j=1;j<=tableLength;j++){
     table.rows[j].cells[0].innerHTML = j;
   }
@@ -118,9 +115,14 @@ function deleteProduct(x){
 function editProduct(x){
   var i = x.parentNode.parentNode.rowIndex;
   var obiekt = testBill.productList[i-1];
+  var table = document.getElementById("billTable");
   console.log(obiekt);
   obiekt.name = "Owocek";
-  //działa tylko że się nie odświeża
+  table.rows[i].cells[1].innerHTML = obiekt.name;
+  console.log(obiekt);
+  //działa tylko nie wiem jak dokońca edytować no bo jak nie chcesz
+  //jakieś produktu to go usuwasz czyli logiczne było by aby tylko zmienić 
+  //ilość danego produktu ale to jeszcze do obgadania jak by to zrobić
 }
 
 // let produkty = [];
