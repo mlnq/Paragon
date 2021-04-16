@@ -1,4 +1,3 @@
-
 /*
 @TODO LIST
   - wprowadzanie nowych pozycji paragonu (+1),
@@ -39,15 +38,6 @@ class Bills{
 console.log("działam");
 ///*@TODO ogarnięcie formularza
 
-// const addForm = document.getElementById("addform");
-// addform.onsubmit = (event) => 
-// {
-//  const nowy = document.createElement("input");
-//  nowy.type = "button";
-//  nowy.value = myform.kolor.value;
-//  buttons.append(nowy);
-//  event.preventDefault();
-// }
 
 let testBill = new Bills();
 let testProduct1 = new Product("Mango",2,10);
@@ -63,8 +53,10 @@ testBill.productList.push(testProduct3);
 testBill.productList.push(testProduct3);
 console.log(testBill.productList);
 
-
 const table = document.getElementById("billTable");
+
+
+//starczy dodawac na stringa
 
 //dodawanie elementu do rachunku 
 const addBill = (id,val) =>{
@@ -82,16 +74,33 @@ const addBill = (id,val) =>{
   suma.innerHTML = val.quantity * val.price;
 }
 
+
 testBill.productList.forEach((val,id)=>
  addBill(id,val)
 );
 
+const addForm = document.getElementById("addForm");
+console.log(addForm.name);
+addForm.onsubmit = (event) => 
+{
+  let name= addForm.name.value;
+  let quantity= addForm.quantity.value;
+  let cost= addForm.cost.value;
+  let prod=new Product(name,quantity,cost);
+  testBill.productList.push(prod);
+  addBill(testBill.productList.length-1,prod);
+  event.preventDefault();
+}
+
+// let produkty = [];
+
+// localStorage.produkty = testBill.productList;
+// console.log(produkty);
+
+// testBill.productList = localStorage.produkty;
 
 
-// console.log(table.rows);
-// console.log(table.rows[0].cells.length);
-
-//sortowanie tablicy z geeks4geeks xd
+//sortowanie tablicy g4g
 function sortTableASC(){
   var rows, switching, i, x, y, shouldSwitch;
   switching = true;
@@ -116,3 +125,8 @@ function sortTableASC(){
   }  
 }
 sortTableASC();
+
+
+
+// console.log(table.rows);
+// console.log(table.rows[0].cells.length);
