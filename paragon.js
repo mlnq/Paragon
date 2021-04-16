@@ -57,9 +57,10 @@ const table = document.getElementById("billTable");
 
 
 //starczy dodawac na stringa
-
+//let i = 0;
 //dodawanie elementu do rachunku 
 const addBill = (id,val) =>{
+  let i = testBill.productList.length - 1;
   let row = table.insertRow();
   let lp = row.insertCell(0);
   let nazwa = row.insertCell(1);
@@ -67,13 +68,16 @@ const addBill = (id,val) =>{
   let cena = row.insertCell(3);
   let suma = row.insertCell(4);
   let usun = row.insertCell(5);
+  let edytuj = row.insertCell(6);
   lp.id="id";
-  lp.innerHTML = id+1;
+  lp.innerHTML = id + 1;
   nazwa.innerHTML =val.name;
   ilosc.innerHTML =val.quantity;
   cena.innerHTML =val.price;
   suma.innerHTML = val.quantity * val.price;
   usun.innerHTML = "<button onclick='deleteProduct(this)'>Usun</button>";
+  edytuj.innerHTML = "<button onclick='editProduct(this)'>Edytuj</button>";
+  i++;
 }
 
 
@@ -99,12 +103,24 @@ function deleteProduct(x){
   console.log(i);
   testBill.productList.splice(i - 1,1);
   var tableLength = testBill.productList.length;
-  document.getElementById("billTable").deleteRow(i);
   var table = document.getElementById("billTable");
-
-  table.setAttribute("id",2);
+  
+  
+  document.getElementById("billTable").deleteRow(i);
+  //var table = document.getElementById("billTable");
+  for(let j=1;j<=tableLength;j++){
+    table.rows[j].cells[0].innerHTML = j;
+  }
   console.log(testBill.productList);
   
+}
+
+function editProduct(x){
+  var i = x.parentNode.parentNode.rowIndex;
+  var obiekt = testBill.productList[i-1];
+  console.log(obiekt);
+  obiekt.name = "Owocek";
+  //działa tylko że się nie odświeża
 }
 
 // let produkty = [];
