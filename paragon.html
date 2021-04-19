@@ -10,6 +10,14 @@
     <title>ParagonApp</title>
   </head>
   <body>
+    <div class="addForm">
+      <form name="addForm" method="post" id="addForm" >
+        <span>Nazwa:<input type="text" name="name"></span>   
+        <span>Ilość:<input type="text" name="quantity"></span>   
+        <span>Cena:<input type="text" name="cost"></span>           
+        <input id="addProduct" type="submit" value="OK">
+        </form>
+    </div>
     <div class="container">
         <h1 class="header">Paragon JS</h1>
         <hr>
@@ -21,44 +29,29 @@
             <th>CENA</th>
             <th>SUMA</th>
             <th></th>
-          </tr>
-          <!-- <tr>
-            <td>1</td>
-            <td>test nazwa</td>
-            <td>10</td>
-            <td>100</td>
-            <td>100</td>
-          </tr> -->
-          
+          </tr>         
         </table>
-        <div style="position: absolute; bottom:6vh;">
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-          <div class="triangle"></div>
-        </div>
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
+        <div class="triangle"></div>
       </div>
     </div>
-    <div class="addForm">
-      <form name="addForm" method="post" id="addForm">
-        <span>Nazwa:<input type="text" name="name"></span>   
-        <span>Ilość:<input type="text" name="quantity"></span>   
-        <span>Cena:<input type="text" name="cost"></span>           
-        <br>
-         <input id="addProduct" type="submit" value="OK">
-        </form>
-    </div>
+    
+    
     <script src="paragon.js"></script>
   </body>
 </html>

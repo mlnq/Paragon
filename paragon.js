@@ -56,7 +56,6 @@ function deleteProduct(x){
   document.getElementById("billTable").deleteRow(i);
   productList.splice(i-1,1);
   localStorage.billList=JSON.stringify(productList);
-  numerize();
 }
 
 //dodawanie nowego rachunku
@@ -82,7 +81,6 @@ document.body.onload = function () {
     console.log(JSON.parse(localStorage.billList));
     productList.forEach((val, id) => addBill(id, val));    
   }
-  numerize()
   
 };
 
@@ -112,6 +110,8 @@ function sortTableASC() {
 // console.log(document.getElementById("billTable"));
 // console.log(document.getElementById("billTable").rows[1].cells.length);
 console.log(table.rows[0].cells.length);
+
+//numerowanie nie dziala
 
 function numerize(){
   for(let rowId=1;rowId<=table.rows.length;rowId++)
