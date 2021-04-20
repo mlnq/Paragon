@@ -75,3 +75,7 @@ border-color: #ffffff transparent transparent transparent;
 span{
   display: inline-block;
 }
+
+.arrow{
+  cursor: pointer;
+}

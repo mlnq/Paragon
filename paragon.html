@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="paragon.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,300&display=swap" rel="stylesheet"> 
-    <title>ParagonApp</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">  
+<title>ParagonApp</title>
   </head>
   <body>
     <div class="addForm">
       <form name="addForm" method="post" id="addForm" >
         <span>Nazwa:<input type="text" name="name"></span>   
-        <span>Ilość:<input type="text" name="quantity"></span>   
-        <span>Cena:<input type="text" name="cost"></span>           
+        <span>Ilość:<input type="number" step="1" name="quantity"></span>   
+        <span>Cena:<input type="number" step="0.01" name="cost"></span>           
         <input id="addProduct" type="submit" value="OK">
         </form>
     </div>
@@ -31,7 +33,12 @@
             <th></th>
           </tr>         
         </table>
+      <div id="total">
+
+      </div>    
+        
       </div>
+      
       <div style="display: flex; justify-content: center;">
         <div class="triangle"></div>
         <div class="triangle"></div>
@@ -49,6 +56,7 @@
         <div class="triangle"></div>
         <div class="triangle"></div>
       </div>
+    
     </div>
     
     
