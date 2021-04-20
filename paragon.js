@@ -60,7 +60,6 @@ const table = document.getElementById("billTable");
 //let i = 0;
 //dodawanie elementu do rachunku 
 const addBill = (id,val) =>{
-  let i = testBill.productList.length - 1;
   let row = table.insertRow();
   let lp = row.insertCell(0);
   let nazwa = row.insertCell(1);
@@ -77,8 +76,8 @@ const addBill = (id,val) =>{
   suma.innerHTML = val.quantity * val.price;
   usun.innerHTML = "<button onclick='deleteProduct(this)'>Usun</button>";
   edytuj.innerHTML = "<button onclick='editProduct(this)'>Edytuj</button>";
-  i++;
 }
+
 
 
 testBill.productList.forEach((val,id)=>
@@ -99,30 +98,38 @@ addForm.onsubmit = (event) =>
 }
 
 function deleteProduct(x){
-  var i = x.parentNode.parentNode.rowIndex;
+  var result = confirm("Czy jesteś pewien?"); 
+  if(result){
+    var i = x.parentNode.parentNode.rowIndex;
   console.log(i);
   testBill.productList.splice(i - 1,1);
   var tableLength = testBill.productList.length;
   var table = document.getElementById("billTable");
+ 
   document.getElementById("billTable").deleteRow(i);
+
   for(let j=1;j<=tableLength;j++){
     table.rows[j].cells[0].innerHTML = j;
   }
   console.log(testBill.productList);
+  }
+  
   
 }
 
 function editProduct(x){
   var i = x.parentNode.parentNode.rowIndex;
   var obiekt = testBill.productList[i-1];
-  var table = document.getElementById("billTable");
-  console.log(obiekt);
-  obiekt.name = "Owocek";
-  table.rows[i].cells[1].innerHTML = obiekt.name;
-  console.log(obiekt);
-  //działa tylko nie wiem jak dokońca edytować no bo jak nie chcesz
-  //jakieś produktu to go usuwasz czyli logiczne było by aby tylko zmienić 
-  //ilość danego produktu ale to jeszcze do obgadania jak by to zrobić
+  var editQuantity = prompt("Ile chcesz mieć powtórzeń tego produktu?");
+  if(editQuantity > 0 && !isNaN(editQuantity)){
+    obiekt.quantity = editQuantity;
+    var table = document.getElementById("billTable");
+    table.rows[i].cells[2].innerHTML = obiekt.quantity;
+    var suma = obiekt.quantity * obiekt.price;
+    table.rows[i].cells[4].innerHTML = suma;
+  }else{
+    alert("Podana przez ciebie liczba jest niewłaściwa!");
+  }
 }
 
 // let produkty = [];
@@ -162,4 +169,4 @@ sortTableASC();
 
 
 // console.log(table.rows);
-// console.log(table.rows[0].cells.length);
+// console.log(table.rows[0].cells.length); 
