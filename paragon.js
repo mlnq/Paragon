@@ -1,10 +1,11 @@
 /*
 @todo LIST
-  - wprowadzanie nowych pozycji paragonu (+1),
-  - edycję istniejących pozycji (+1),
+  [done] - wprowadzanie nowych pozycji paragonu (+1),
+  [done] - edycję istniejących pozycji (+1),
   [done] - usuwanie ich (+1),
   - zmianę kolejności (+1).
   [done] - local storage - Zawartość listy przechowuj (+1) 
+  - suma.
 */
 /*
 Zalecane podejście: 
@@ -39,6 +40,7 @@ const addBill = (id, val) => {
   let cena = row.insertCell(3);
   let suma = row.insertCell(4);
   let usun = row.insertCell(5);
+  let edytuj = row.insertCell(6);
   lp.id = "id";
   lp.innerHTML = id + 1;
   nazwa.innerHTML = val.name;
@@ -46,16 +48,33 @@ const addBill = (id, val) => {
   cena.innerHTML = val.price;
   suma.innerHTML = val.quantity * val.price;
   usun.innerHTML = "<button onclick='deleteProduct(this)'>Usuń</button>";
+  edytuj.innerHTML = "<button onclick='editProduct(this)'>Edytuj</button>";
   // console.log(table.rows.length);
 };
-
 
 
 function deleteProduct(x){
   var i = x.parentNode.parentNode.rowIndex;
   document.getElementById("billTable").deleteRow(i);
   productList.splice(i-1,1);
+  numerize(productList.length);
   localStorage.billList=JSON.stringify(productList);
+}
+
+function editProduct(x){
+  var i = x.parentNode.parentNode.rowIndex;
+  var obiekt = productList[i-1];
+  var editQuantity = prompt("Ile chcesz mieć powtórzeń tego produktu?");
+  if(editQuantity > 0 && !isNaN(editQuantity)){
+    obiekt.quantity = editQuantity;
+    var table = document.getElementById("billTable");
+    table.rows[i].cells[2].innerHTML = obiekt.quantity;
+    var suma = obiekt.quantity * obiekt.price;
+    table.rows[i].cells[4].innerHTML = suma;
+    localStorage.billList = JSON.stringify(productList);
+  }else{
+    alert("Podana przez ciebie liczba jest niewłaściwa!");
+  }
 }
 
 //dodawanie nowego rachunku
@@ -113,9 +132,11 @@ console.log(table.rows[0].cells.length);
 
 //numerowanie nie dziala
 
-function numerize(){
-  for(let rowId=1;rowId<=table.rows.length;rowId++)
-  console.log(rowId);
-  console.log(table.rows[rowId].cells.length);
-
+function numerize(tableLength){
+  // for(let rowId=1;rowId<=table.rows.length;rowId++)
+  // console.log(rowId);
+  // console.log(table.rows[rowId].cells.length);
+  for(let j=1;j<=tableLength;j++){
+    table.rows[j].cells[0].innerHTML = j;
+  }
 }
