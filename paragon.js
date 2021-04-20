@@ -1,5 +1,5 @@
 /*
-@TODO LIST
+@todo LIST
   - wprowadzanie nowych pozycji paragonu (+1),
   - edycję istniejących pozycji (+1),
   [done] - usuwanie ich (+1),
@@ -18,6 +18,7 @@ jak i modyfikację widoku (fragmentu dokumentu).*/
 ///*@TODO
 // 1.Ogarnąć dodawanie elementów przez formularz
 // 2.dodawanie elementów na localStorage
+let productList = [];
 
 class Product {
   constructor(name, quantity, price) {
@@ -26,17 +27,6 @@ class Product {
     this.price = price;
   }
 }
-
-class Bills {
-  constructor() {
-    this.productList = [];
-  }
-}
-
-console.log("działam");
-///*@TODO ogarnięcie formularza
-
-let testBill = new Bills();
 
 const table = document.getElementById("billTable");
 
@@ -56,43 +46,42 @@ const addBill = (id, val) => {
   cena.innerHTML = val.price;
   suma.innerHTML = val.quantity * val.price;
   usun.innerHTML = "<button onclick='deleteProduct(this)'>Usuń</button>";
+  // console.log(table.rows.length);
 };
+
 
 
 function deleteProduct(x){
   var i = x.parentNode.parentNode.rowIndex;
   document.getElementById("billTable").deleteRow(i);
-  // console.log(i);
- testBill.productList.splice(i-1,1);
-  // console.log(testBill.productList);
-  localStorage.billList=JSON.stringify(testBill.productList);
+  productList.splice(i-1,1);
+  localStorage.billList=JSON.stringify(productList);
 }
 
 //dodawanie nowego rachunku
 const addForm = document.getElementById("addForm");
-console.log(addForm.name);
 addForm.onsubmit = (event) => {
   let name = addForm.name.value;
   let quantity = addForm.quantity.value;
   let cost = addForm.cost.value;
-
   let prod = new Product(name, quantity, cost);
+  productList.push(prod);
+  addBill(productList.length - 1, prod);
 
-  testBill.productList.push(prod);
-  addBill(testBill.productList.length - 1, prod);
-
-  localStorage.billList = JSON.stringify(testBill);
+  localStorage.billList = JSON.stringify(productList);
   event.preventDefault();
 };
 
 // wczytywanie elementów przy uruchomieniu
 document.body.onload = function () {
-  if (localStorage.billList) 
+  if (localStorage.billList ) 
   {
-    testBill = JSON.parse(localStorage.billList);
-    console.log(testBill);
-    testBill.productList.forEach((val, id) => addBill(id, val));
+    productList = JSON.parse(localStorage.billList);
+    console.log(productList);
+    console.log(JSON.parse(localStorage.billList));
+    productList.forEach((val, id) => addBill(id, val));    
   }
+  
 };
 
 //sortowanie tablicy g4g
@@ -102,7 +91,7 @@ function sortTableASC() {
   while (switching) {
     switching = false;
     rows = table.rows;
-    for (i = 1; i < rows.length - 1; i++) {
+    for (let i = 1; i < rows.length - 1; i++) {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("TD")[0];
       y = rows[i + 1].getElementsByTagName("TD")[0];
@@ -118,7 +107,15 @@ function sortTableASC() {
     }
   }
 }
-sortTableASC();
+// console.log(document.getElementById("billTable"));
+// console.log(document.getElementById("billTable").rows[1].cells.length);
+console.log(table.rows[0].cells.length);
 
-// console.log(table.rows);
-// console.log(table.rows[0].cells.length);
+//numerowanie nie dziala
+
+function numerize(){
+  for(let rowId=1;rowId<=table.rows.length;rowId++)
+  console.log(rowId);
+  console.log(table.rows[rowId].cells.length);
+
+}
